@@ -82,17 +82,26 @@
             color: #6b6c77;
         }
 
-        #loginButton {
+        .login-Button {
             width: 100%;
             padding: 12px;
             background-color: #10a37f;
             border: none;
             border-radius: 6px;
-            color: #ffffff;
+            color: white;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .login-Button:hover {
+            background-color: #0e8e6a;
+        }
+
+        .login-Button:active {
+            transform: scale(0.95);
         }
 
         .success-message {
@@ -160,7 +169,7 @@
             <label>密碼</label><input id="password" type="password" placeholder="請輸入密碼">
         </div>
 
-        <button id="loginButton" onclick="login()">Login</button>
+        <button class="login-Button" onclick="login()">Login</button>
 
         <!-- 登入成功後的處理 -->
         <!-- 登入成功 -->
