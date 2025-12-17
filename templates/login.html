@@ -7,7 +7,22 @@
     <title>My ChatGPT</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black;
+            color: #ececf1;
+        }
     </style>
 
     <script>
@@ -52,7 +67,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="login-container">
         <div>
             <h1>My ChatGPT 登入畫面</h1>
             <p>登入以繼續使用</p>
@@ -61,17 +76,17 @@
             <label>帳號</label><input id="account">
         </div>
         <div>
-            <label>密碼</label><input id="password" type="password">
+            <label>密碼</label><input id="password" type="password" placeholder="請輸入密碼">
         </div>
 
-        <button onclick="login()">Login</button>
+        <button id="loginButton" onclick="login()">Login</button>
 
-        // 登入成功後的處理
+        <!-- 登入成功後的處理 -->
         <!-- 登入成功 -->
-        <div></div>
+        <div id="loginSuccessMessage" class="success-message" style="display:none;">登入成功！</div>
 
         <!-- 登入失敗 -->
-        <div></div>
+        <div id="loginFailureMessage" class="failure-message" style="display:none;">登入失敗，請檢查帳號密碼。</div>
     </div>
 </body>
 
