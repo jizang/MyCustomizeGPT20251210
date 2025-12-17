@@ -120,8 +120,6 @@
             var account = document.getElementById("account").value;
             var password = document.getElementById("password").value;
 
-            // alert(`Login function called: Account=${account}, Password=${password}`);
-
             // 呼叫後端API取得AI回覆
             fetch('/login-action', {
                 method: 'POST',
@@ -133,26 +131,23 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
-                    // alert(data.status);
 
                     if (data.status === 'success') {
-                        // 登入成功後的處理
-                        localStorage.setItem('authToken', data.token);
-
                         document.getElementById('loginSuccessMessage').style.display = 'block';
                         document.getElementById('loginFailureMessage').style.display = 'none';                       
-                        document.getElementById('successMessage').innerText = '登入成功！正在跳轉...';
-                        document.getElementById('errorMessage').innerText = '';
+                        document.getElementById('loginSuccessMessage').innerText = '登入成功！正在跳轉...';
+                        document.getElementById('loginFailureMessage').innerText = '';
+                        
+                        // 登入成功後的處理
+                        localStorage.setItem('authToken', data.token);
 
                         window.location.href = '/'; // 重定向到主頁
                     } else {
                         // 登入失敗的處理
-                        // alert('登入失敗，請檢查帳號密碼。');
-
                         document.getElementById('loginSuccessMessage').style.display = 'none';
                         document.getElementById('loginFailureMessage').style.display = 'block';                       
-                        document.getElementById('successMessage').innerText = '';
-                        document.getElementById('errorMessage').innerText = '登入失敗，請檢查帳號密碼。';
+                        document.getElementById('loginSuccessMessage').innerText = '';
+                        document.getElementById('loginFailureMessage').innerText = '登入失敗，請檢查帳號密碼。';
 
                         // 清除本地存儲的token
                         localStorage.removeItem('authToken');
