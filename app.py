@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 import requests
+import secrets
 
 app = Flask(__name__)
 
@@ -16,15 +17,19 @@ def login_action():
     data = request.get_json()
     account = data.get('account')
     password = data.get('password')
-    # if account != 'sean.ma@thetainformation.com' or password != '1234567890':
-    #     return '{"status": "error", "message": "Invalid credentials"}'
-    # return '{"status": "success", "token": "JDFHBVWHSJDHKS;12JNWTELVT"}'
+
     response = readAccount(account, password)
     
     if response.get("account") is None:
         return jsonify({"status": "error", "message": "Invalid credentials"})
+    
+    token = generate_token()
+    updateAccount(account, token)
+
     return jsonify({"status": "success", "token": "JDFHBVWHSJDHKS;12JNWTELVT"})
 
+def generate_token():
+    return secrets.token_urlsafe(32)
 
 @app.route('/callAI', methods=['GET'])
 def call_ai():
@@ -34,7 +39,12 @@ def call_ai():
     return jsonify({"message": message["output"]})
 
 def readAccount(account, password):
-    response = requests.post('http://localhost:5678/webhook-test/account', params={"account": account, "password": password})
+    response = requests.post('http://localhost:5678/webhook/account', params={"account": account, "password": password})
+    message = response.json()
+    return message
+
+def updateAccount(account, token):
+    response = requests.post("http://localhost:5678/webhook/accountUpdate", params={"account": account, "token": token})
     message = response.json()
     return message
 
