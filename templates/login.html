@@ -33,6 +33,77 @@
             max-width: 400px;
             text-align: center;
         }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .login-header h1 {
+            font-weight: 600;
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: #ececf1;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            color: #8e8ea0;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #ececf1;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #3e3f4b;
+            border-radius: 6px;
+            background-color: #2a2b32;
+            color: #ececf1;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            border-color: #10a37f;
+            outline: none;
+        }
+
+        .input-group input::placeholder {
+            color: #6b6c77;
+        }
+
+        #loginButton {
+            width: 100%;
+            padding: 12px;
+            background-color: #10a37f;
+            border: none;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .success-message {
+            color: #4caf50;
+            margin-top: 16px;
+        }
+
+        .failure-message {
+            color: #f44336;
+            margin-top: 16px;
+        }
     </style>
 
     <script>
@@ -78,14 +149,14 @@
 
 <body>
     <div class="login-container">
-        <div>
+        <div class="login-header">
             <h1>My ChatGPT 登入畫面</h1>
             <p>登入以繼續使用</p>
         </div>
-        <div>
+        <div class="input-group">
             <label>帳號</label><input id="account">
         </div>
-        <div>
+        <div class="input-group">
             <label>密碼</label><input id="password" type="password" placeholder="請輸入密碼">
         </div>
 
