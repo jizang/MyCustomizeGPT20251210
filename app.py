@@ -11,8 +11,11 @@ def home():
 def login():
     return render_template('login.html')
 
-@app.route('/login-action')
+@app.route('/login-action', methods=['POST'])
 def login_action():
+    data = request.get_json()
+    account = data.get('account')
+    password = data.get('password')
     return '{"status": "success", "token": "JDFHBVWHSJDHKS;12JNWTELVT"}'
 
 @app.route('/callAI', methods=['GET'])

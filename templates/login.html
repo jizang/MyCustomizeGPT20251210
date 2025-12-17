@@ -18,7 +18,13 @@
             alert(`Login function called: Account=${account}, Password=${password}`);
 
             // 呼叫後端API取得AI回覆
-            fetch('/login-action?username=' + encodeURIComponent(account) + '&password=' + encodeURIComponent(password))
+            fetch('/login-action', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ account: account, password: password })
+            })
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
