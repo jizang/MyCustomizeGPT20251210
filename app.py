@@ -16,6 +16,8 @@ def login_action():
     data = request.get_json()
     account = data.get('account')
     password = data.get('password')
+    if account != '111' or password != '25971684':
+        return '{"status": "error", "message": "Invalid credentials"}'
     return '{"status": "success", "token": "JDFHBVWHSJDHKS;12JNWTELVT"}'
 
 @app.route('/callAI', methods=['GET'])
