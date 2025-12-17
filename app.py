@@ -16,9 +16,15 @@ def login_action():
     data = request.get_json()
     account = data.get('account')
     password = data.get('password')
-    if account != '111' or password != '25971684':
-        return '{"status": "error", "message": "Invalid credentials"}'
-    return '{"status": "success", "token": "JDFHBVWHSJDHKS;12JNWTELVT"}'
+    # if account != 'sean.ma@thetainformation.com' or password != '1234567890':
+    #     return '{"status": "error", "message": "Invalid credentials"}'
+    # return '{"status": "success", "token": "JDFHBVWHSJDHKS;12JNWTELVT"}'
+    response = readAccount(account, password)
+    
+    if response.get("account") is None:
+        return jsonify({"status": "error", "message": "Invalid credentials"})
+    return jsonify({"status": "success", "token": "JDFHBVWHSJDHKS;12JNWTELVT"})
+
 
 @app.route('/callAI', methods=['GET'])
 def call_ai():
@@ -26,6 +32,11 @@ def call_ai():
     message = request.args.get("message")
     message = calln8n(message)
     return jsonify({"message": message["output"]})
+
+def readAccount(account, password):
+    response = requests.post('http://localhost:5678/webhook-test/account', params={"account": account, "password": password})
+    message = response.json()
+    return message
 
 def calln8n(prompt):
     response = requests.get('http://localhost:5678/webhook/n8nCall', params={"content": prompt})  # Example n8n webhook call
